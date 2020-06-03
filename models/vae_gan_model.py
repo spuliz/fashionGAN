@@ -59,7 +59,7 @@ class VaeGANModel(BaseModel):
 
 
     def get_current_errors(self):
-        z1 = self.z_encoded.data.cpu().numpy()
+        z1 = self.z_encoded.data.gpu().numpy()
         loss_L1 = self.loss_L1
         ret_dict = OrderedDict([('L1_loss', loss_L1.data)])
         ret_dict['KL'] = self.loss_kl.data[0]

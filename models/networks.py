@@ -1040,7 +1040,7 @@ class GLCM(nn.Module):
     def forward(self, input):
         _, C, H, W = input.size()
         np_data = torch.mean(input[0].data, 0)
-        np_data = np_data.cpu().numpy() * 127.0 + 128.0
+        np_data = np_data.gpu().numpy() * 127.0 + 128.0
         np_data = np_data.astype(int)
         result = greycomatrix(np_data, [1], [0], levels = 256, symmetric = True, normed = True)
         return Variable(torch.cuda.FloatTensor(result), requires_grad=False)

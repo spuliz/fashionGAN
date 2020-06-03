@@ -278,7 +278,7 @@ class BiCycleGANModel(BaseModel):
         return gradient_penalty
 
     def get_current_errors(self):
-        z1 = self.z_encoded.data.cpu().numpy()
+        z1 = self.z_encoded.data.gpu().numpy()
         if self.opt.lambda_z > 0.0 and not self.opt.which_image_encode == 'contour':
             loss_G = self.loss_G + self.loss_z_L1
         else:
