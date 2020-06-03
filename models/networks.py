@@ -154,7 +154,7 @@ def define_G(input_nc, output_nc, nz, ngf,
             'Generator model name [%s] is not recognized' % which_model_netG)
 
     if len(gpu_ids) > 0:
-        print gpu_ids
+        print(gpu_ids)
         #input()   
         netG.cuda(gpu_ids[0])
 
