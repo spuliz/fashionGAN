@@ -270,8 +270,8 @@ class BaseModel():
         input_A = input['A' if AtoB else 'B']
         input_B = input['B' if AtoB else 'A']
         if len(self.gpu_ids) > 0:
-            input_A = input_A.cuda(self.gpu_ids[0], async=False)
-            input_B = input_B.cuda(self.gpu_ids[0], async=True)
+            input_A = input_A.cuda(self.gpu_ids[0], non_blocking=False)
+            input_B = input_B.cuda(self.gpu_ids[0], non_blocking=True)
         self.input_A = input_A
         self.input_B = input_B
         # show input_A input_B
@@ -282,7 +282,7 @@ class BaseModel():
             input_C = input['C']
             #self.showim(input_C)
             if len(self.gpu_ids) > 0:
-                input_C = input_C.cuda(self.gpu_ids[0], async=True)
+                input_C = input_C.cuda(self.gpu_ids[0], non_blocking=True)
             self.input_C = input_C
 
         # get image paths
@@ -598,8 +598,8 @@ class Stage2BaseModel():
         input_A = input['A' if AtoB else 'B']
         input_B = input['B' if AtoB else 'A']
         if len(self.gpu_ids) > 0:
-            input_A = input_A.cuda(self.gpu_ids[0], async=True)
-            input_B = input_B.cuda(self.gpu_ids[0], async=True)
+            input_A = input_A.cuda(self.gpu_ids[0], non_blocking=True)
+            input_B = input_B.cuda(self.gpu_ids[0], non_blocking=True)
         self.input_A = input_A
         self.input_B = input_B
         # show input_A input_B
@@ -610,7 +610,7 @@ class Stage2BaseModel():
             input_C = input['C']
             #self.showim(input_C)
             if len(self.gpu_ids) > 0:
-                input_C = input_C.cuda(self.gpu_ids[0], async=True)
+                input_C = input_C.cuda(self.gpu_ids[0], non_blocking=True)
             self.input_C = input_C
 
         # get image paths
