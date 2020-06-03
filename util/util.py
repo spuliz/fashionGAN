@@ -9,7 +9,7 @@ import pickle
 # Converts a Tensor into a Numpy array
 # |imtype|: the desired type of the converted numpy array
 def tensor2im(image_tensor, imtype=np.uint8, cvt_rgb=True):
-    image_numpy = image_tensor[0].cpu().float().numpy()
+    image_numpy = image_tensor[0].gpu().float().numpy()
     if image_numpy.shape[0] == 1 and cvt_rgb:
         image_numpy = np.tile(image_numpy, (3, 1, 1))
     image_numpy = (np.transpose(image_numpy, (1, 2, 0)) + 1) / 2.0 * 255.0
@@ -17,7 +17,7 @@ def tensor2im(image_tensor, imtype=np.uint8, cvt_rgb=True):
 
 
 def tensor2vec(vector_tensor):
-    numpy_vec = vector_tensor.data.cpu().numpy()
+    numpy_vec = vector_tensor.data.gpu().numpy()
     if numpy_vec.ndim == 4:
         return numpy_vec[:, :, 0, 0]
     else:
